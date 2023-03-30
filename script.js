@@ -5,6 +5,8 @@ const play_continer = document.querySelector('.play_continer');
 const snake_platform = document.querySelector('.snake_platform');
 const score_board = document.querySelector('.score_point');
 const OverScore = document.querySelector('.OverScore');
+const iconboxContainer= document.querySelector('.iconbox');
+const iconbox = document.querySelectorAll('.iconbox div');
 
 // Game Variables
  let snakeArr = [ {row: 13, col:13} ];
@@ -56,6 +58,7 @@ function handleGame(){
         play_continer.style.display='flex';
         play_Game.textContent = 'Play Again!';
         OverScore.textContent = `Your Score : ${score}`;
+        iconboxContainer.style.display='none';
 
     }
      
@@ -161,6 +164,55 @@ function getDirection(keyName){
     }
 }
 
+// control the direction from keys div
+function pressKey(arrowName) {
+        // continue running snake
+        direction ={ row:0 , col:1}
+    
+        switch(arrowName){
+    
+            case 'ArrowUp':
+                direction.row = -1;
+                direction.col = 0;
+                Volume.play();
+                gameover.pause();
+                foodS.pause();
+                break;
+    
+            case 'ArrowDown':
+                direction.row = 1;
+                direction.col = 0;
+                Volume.play();
+                gameover.pause();
+                foodS.pause();
+                break;
+    
+            case 'ArrowLeft':
+                direction.row = 0;
+                direction.col = -1;
+                Volume.play();
+                gameover.pause();
+                foodS.pause();
+    
+                break;
+    
+            case 'ArrowRight':
+                direction.row = 0;
+                direction.col = 1;
+                Volume.play();
+                gameover.pause();
+                foodS.pause();
+                break;
+    
+            default:
+                direction.row = 0;
+                direction.col = 0;
+                Volume.pause();
+                gameover.pause();
+                foodS.pause();
+                break;
+        }
+}
 // Function for starting 
 function startGame(currTime){
 
@@ -175,6 +227,7 @@ window.addEventListener('keydown',(e)=>{
     
     if(e.keyCode === 32){
         // hide & show
+        iconboxContainer.style.display= 'grid';
         container.style.display ='flex';
         play_continer.style.display='none';
 
@@ -185,6 +238,11 @@ window.addEventListener('keydown',(e)=>{
         // Call the functions
         window.requestAnimationFrame(startGame);
         window.addEventListener('keydown',(e)=> getDirection(e.key));
+        iconbox.forEach(name =>{
+            name.addEventListener('click',(e)=>{
+              pressKey(e.target.className);
+            })
+        });
     }
 
 });
@@ -193,6 +251,7 @@ window.addEventListener('keydown',(e)=>{
 play_Game.addEventListener('click',(e)=>{
 
     // hide & show
+    iconboxContainer.style.display= 'grid';
     container.style.display ='flex';
     play_continer.style.display='none';
 
@@ -203,4 +262,10 @@ play_Game.addEventListener('click',(e)=>{
     // Call the functions
     window.requestAnimationFrame(startGame);
     window.addEventListener('keydown',(e)=> getDirection(e.key));
+    iconbox.forEach(name =>{
+        name.addEventListener('click',(e)=>{
+          pressKey(e.target.className);
+        })
+    });
 });
+
