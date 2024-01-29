@@ -1,7 +1,4 @@
 # Snake Game 🐍
-
-## Overview
-
 This Snake Game is a classic and entertaining web-based game built using HTML, CSS, and JavaScript. It brings back the nostalgia of the retro Snake Game but with a modern twist.
 [Snake Game](https://jagrati1213.github.io/snake-game/)
 
